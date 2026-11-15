@@ -243,6 +243,13 @@ symbol .a{stroke:var(--accent)}symbol .b{stroke:var(--muted)}
 .nav .wrap{gap:12px}.nav nav{gap:2px}.nav nav a{font-size:.86rem;padding:6px 8px}
 /* Contorno azul de fondo en las letras que tocan la franja amarilla */
 .hero h1 em{text-shadow:4.0px 0.0px 0 var(--bg),3.7px 1.53px 0 var(--bg),2.83px 2.83px 0 var(--bg),1.53px 3.7px 0 var(--bg),0.0px 4.0px 0 var(--bg),-1.53px 3.7px 0 var(--bg),-2.83px 2.83px 0 var(--bg),-3.7px 1.53px 0 var(--bg),-4.0px 0.0px 0 var(--bg),-3.7px -1.53px 0 var(--bg),-2.83px -2.83px 0 var(--bg),-1.53px -3.7px 0 var(--bg),-0.0px -4.0px 0 var(--bg),1.53px -3.7px 0 var(--bg),2.83px -2.83px 0 var(--bg),3.7px -1.53px 0 var(--bg)}
+/* Cuatro cartas sueltas en la cabecera de "Arma tu deck" */
+.deckcards{position:absolute;right:20px;top:-6px;display:flex;gap:14px;z-index:-1}
+.dc{width:98px;height:137px;border-radius:10px;border:4px solid var(--gold);background:var(--c);transform:rotate(var(--t));padding:6px 7px;color:#fff;font:400 .78rem var(--display);box-shadow:var(--shadow);display:flex;flex-direction:column;gap:2px}
+.dc b{font-weight:400;line-height:1}
+.dcpx{margin:auto;background:rgba(255,255,255,.82);border-radius:7px;padding:5px}
+@media (max-width:1000px){.deckcards{position:static;margin:22px 0 4px;gap:10px;flex-wrap:wrap}.dc{width:74px;height:104px}.dc .dcpx svg{width:44px;height:44px}}
+@media (min-width:1001px){#deck h2+.lead{max-width:min(62ch,calc(100% - 480px))}}
 </style>
 </head>
 <body>
@@ -487,6 +494,7 @@ symbol .a{stroke:var(--accent)}symbol .b{stroke:var(--muted)}
     <div class="eyebrow">Paso 4</div>
     <h2>Arma tu deck</h2>
     <p class="lead">Reglas fijas: exactamente <b>60 cartas</b>, máximo <b>4 copias</b> de cartas con el mismo nombre (excepto Energía Básica), al menos un Pokémon Básico y solo <b>1 carta AS TÁCTICO</b> (ACE SPEC) en toda la baraja.</p>
+    <div class="deckcards" aria-hidden="true"><div class="dc" style="--c:#2d8fd5;--t:-5deg"><span data-icon="Agua" data-scale="1.5"></span><b>Agua</b><span class="dcpx" data-sprite="Gotín" data-scale="4"></span></div><div class="dc" style="--c:#5aa33a;--t:3deg"><span data-icon="Planta" data-scale="1.5"></span><b>Planta</b><span class="dcpx" data-sprite="Brotín" data-scale="4"></span></div><div class="dc" style="--c:#e4572e;--t:-2deg"><span data-icon="Fuego" data-scale="1.5"></span><b>Fuego</b><span class="dcpx" data-sprite="Brasalito" data-scale="4"></span></div><div class="dc" style="--c:#9b5fc0;--t:5deg"><span data-icon="Psíquico" data-scale="1.5"></span><b>Psíquico</b><span class="dcpx" data-sprite="Velito" data-scale="4"></span></div></div>
 
     <div class="lab">
       <div class="card">
