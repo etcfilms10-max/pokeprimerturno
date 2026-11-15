@@ -61,8 +61,6 @@ header.nav{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--b
 .fan .m2{background:#5aa33a;transform:rotate(-8deg)}
 .fan .m3{background:#e4572e;transform:rotate(6deg)}
 .fan .m4{background:#9b5fc0;transform:rotate(20deg)}
-.fan:hover .m1{transform:rotate(-30deg)}.fan:hover .m2{transform:rotate(-11deg)}
-.fan:hover .m3{transform:rotate(9deg)}.fan:hover .m4{transform:rotate(28deg)}
 
 /* cards & grids */
 .grid{display:grid;gap:16px;margin-top:28px}
@@ -226,6 +224,13 @@ symbol .a{stroke:var(--accent)}symbol .b{stroke:var(--muted)}
 .corner{position:absolute;right:16px;top:14px}
 .mrow{grid-template-columns:36px minmax(0,1.1fr) minmax(0,1fr) 64px}
 @media (max-width:820px){.mrow{grid-template-columns:36px 1fr 64px}}
+
+/* Abanico interactivo: la carta sube al pasar el cursor y pasa al frente al hacer clic */
+.fan .mini{cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent;transform:rotate(var(--r)) translateY(var(--lift,0));transition:transform .28s cubic-bezier(.2,.8,.2,1),box-shadow .28s}
+.fan .m1{--r:-22deg}.fan .m2{--r:-8deg}.fan .m3{--r:6deg}.fan .m4{--r:20deg}
+.fan .mini.front{--lift:-8px;box-shadow:0 14px 34px rgba(0,0,0,.55)}
+.fan .mini:hover,.fan .mini:focus-visible{--lift:-30px}
+.fan .mini:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
 </style>
 </head>
 <body>
@@ -266,7 +271,7 @@ symbol .a{stroke:var(--accent)}symbol .b{stroke:var(--muted)}
         <li><b>~20 min</b>por partida</li>
       </ul>
     </div>
-    <div class="fan" aria-hidden="true">
+    <div class="fan">
       <div class="mini m1"><div><span data-icon="Agua" data-scale="2"></span>Agua</div><span class="bigpx" data-sprite="Gotín" data-scale="6"></span></div>
       <div class="mini m2"><div><span data-icon="Planta" data-scale="2"></span>Planta</div><span class="bigpx" data-sprite="Brotín" data-scale="6"></span></div>
       <div class="mini m3"><div><span data-icon="Fuego" data-scale="2"></span>Fuego</div><span class="bigpx" data-sprite="Brasalito" data-scale="6"></span></div>
@@ -696,6 +701,18 @@ const ICONS={
 };
 document.querySelectorAll('[data-sprite]').forEach(e=>e.innerHTML=sprite(CREATURES[e.dataset.sprite],16,+e.dataset.scale));
 document.querySelectorAll('[data-icon]').forEach(e=>e.innerHTML=sprite(ICONS[e.dataset.icon],12,+e.dataset.scale));
+// Abanico de la portada: clic (o Enter) trae la carta al frente
+let fanZ=10;
+document.querySelectorAll('.fan .mini').forEach(c=>{
+  c.tabIndex=0; c.setAttribute('role','button');
+  c.setAttribute('aria-label','Traer al frente la carta de '+c.textContent.trim());
+  const front=()=>{
+    document.querySelectorAll('.fan .mini.front').forEach(x=>x.classList.remove('front'));
+    c.style.zIndex=++fanZ; c.classList.add('front');
+  };
+  c.addEventListener('click',front);
+  c.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault();front();} });
+});
 </script>
 </body>
 </html>
