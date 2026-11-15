@@ -231,6 +231,15 @@ symbol .a{stroke:var(--accent)}symbol .b{stroke:var(--muted)}
 .fan .mini.front{box-shadow:0 14px 34px rgba(0,0,0,.55)}
 .fan .mini:hover,.fan .mini:focus-visible{--lift:-30px}
 .fan .mini{outline:none}
+
+/* Modo páginas: se muestra una sola sección a la vez y la barra superior se queda fija */
+.js main>section{display:none}
+.js main>section.on{display:block;min-height:calc(100vh - 59px);animation:pagein .25s ease-out}
+@keyframes pagein{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.nav nav a[aria-current="page"]{background:var(--accent);color:var(--accent-ink);font-weight:700}
+.pager{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:56px}
+.pager .btn{font-size:.95rem}
+.pager .next{margin-left:auto}
 </style>
 </head>
 <body>
@@ -720,6 +729,34 @@ fanCards.forEach(c=>{
   c.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault();front();} });
 });
 layFan();
+// Modo páginas: cada sección del menú se abre sola, sin desplazarse por las demás
+const PAGES=[['inicio','Inicio'],['cartas','Las cartas'],['jugar','Cómo se juega'],['tecnicas','Técnicas'],['deck','Arma tu deck'],['meta','Decks ganadores'],['quiz','Ponte a prueba'],['glosario','Glosario']];
+PAGES.forEach(([id],i)=>{
+  if(i===0) return;
+  const pg=document.createElement('div'); pg.className='pager';
+  const prev=PAGES[i-1], next=PAGES[i+1];
+  pg.innerHTML=`<a class="btn" href="#${prev[0]}">← ${prev[1]}</a>`+(next?`<a class="btn primary next" href="#${next[0]}">Siguiente: ${next[1]} →</a>`:'');
+  document.querySelector('#'+id+' .wrap').appendChild(pg);
+});
+function showPage(id){
+  if(!PAGES.some(p=>p[0]===id)) id='inicio';
+  document.querySelectorAll('main>section').forEach(sec=>sec.classList.toggle('on',sec.id===id));
+  document.querySelectorAll('.nav nav a').forEach(a=>{
+    if(a.getAttribute('href')==='#'+id) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current');
+  });
+  window.scrollTo({top:0,behavior:'instant'});
+}
+document.documentElement.classList.add('js');
+// Los enlaces internos cambian de página y guardan la dirección para que funcione el botón Atrás
+document.addEventListener('click',e=>{
+  const a=e.target.closest('a[href^="#"]'); if(!a) return;
+  const id=a.getAttribute('href').slice(1); if(!PAGES.some(p=>p[0]===id)) return;
+  e.preventDefault();
+  try{ history.pushState(null,'','#'+id); }catch(err){}
+  showPage(id);
+});
+window.addEventListener('popstate',()=>showPage(location.hash.slice(1)));
+showPage(location.hash.slice(1));
 </script>
 </body>
 </html>
