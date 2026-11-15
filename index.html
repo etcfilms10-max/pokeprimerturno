@@ -262,14 +262,14 @@ symbol .a{stroke:var(--accent)}symbol .b{stroke:var(--muted)}
 /* ===== Animaciones ===== */
 /* Figuras del fondo: giran o se mecen muy despacio */
 @keyframes spin{to{rotate:360deg}}
-@keyframes sway{from{rotate:-5deg}to{rotate:5deg}}
-@keyframes drift{from{translate:-18px 0}to{translate:18px 0}}
-.fig-hept{animation:spin 140s linear infinite}
-.fig-circ{animation:spin 110s linear infinite reverse}
-.fig-star{animation:spin 170s linear infinite}
-.fig-tri{animation:sway 16s ease-in-out infinite alternate}
-.fig-dome{animation:sway 22s ease-in-out infinite alternate}
-.fig-wave{animation:drift 9s ease-in-out infinite alternate}
+@keyframes sway{from{rotate:-9deg}to{rotate:9deg}}
+@keyframes drift{from{translate:-28px 0}to{translate:28px 0}}
+.fig-hept{animation:spin 45s linear infinite}
+.fig-circ{animation:spin 36s linear infinite reverse}
+.fig-star{animation:spin 60s linear infinite}
+.fig-tri{animation:sway 6s ease-in-out infinite alternate}
+.fig-dome{animation:sway 8s ease-in-out infinite alternate}
+.fig-wave{animation:drift 4s ease-in-out infinite alternate}
 /* Quiz */
 @keyframes hop{0%,100%{translate:0 0}30%{translate:0 -20px}55%{translate:0 0}75%{translate:0 -8px}}
 @keyframes shake{0%,100%{translate:0 0}20%{translate:-6px 0}40%{translate:6px 0}60%{translate:-4px 0}80%{translate:4px 0}}
