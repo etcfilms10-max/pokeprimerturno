@@ -259,6 +259,33 @@ symbol .a{stroke:var(--accent)}symbol .b{stroke:var(--muted)}
 .qc4{right:-24px;bottom:-24px;transform:rotate(-10deg)}
 @media (max-width:820px){.qc1,.qc3{left:-12px}.qc2,.qc4{right:-12px}}
 .types span{padding:5px 12px 5px 8px}.types i{width:auto;height:auto;border:0;border-radius:0;display:block}
+/* ===== Animaciones ===== */
+/* Figuras del fondo: giran o se mecen muy despacio */
+@keyframes spin{to{rotate:360deg}}
+@keyframes sway{from{rotate:-5deg}to{rotate:5deg}}
+@keyframes drift{from{translate:-18px 0}to{translate:18px 0}}
+.fig-hept{animation:spin 140s linear infinite}
+.fig-circ{animation:spin 110s linear infinite reverse}
+.fig-star{animation:spin 170s linear infinite}
+.fig-tri{animation:sway 16s ease-in-out infinite alternate}
+.fig-dome{animation:sway 22s ease-in-out infinite alternate}
+.fig-wave{animation:drift 9s ease-in-out infinite alternate}
+/* Quiz */
+@keyframes hop{0%,100%{translate:0 0}30%{translate:0 -20px}55%{translate:0 0}75%{translate:0 -8px}}
+@keyframes shake{0%,100%{translate:0 0}20%{translate:-6px 0}40%{translate:6px 0}60%{translate:-4px 0}80%{translate:4px 0}}
+.qc.hop{animation:hop .6s ease-out}
+.qc.shake{animation:shake .45s ease-in-out}
+@keyframes fall{from{translate:0 0;rotate:0deg;opacity:1}to{translate:var(--dx) 420px;rotate:360deg;opacity:0}}
+.confetti{position:absolute;top:-10px;z-index:3;pointer-events:none;animation:fall linear both}
+/* Decks ganadores: las barras se llenan al entrar a la sección */
+@keyframes grow{from{width:0}}
+#meta.on .mbar i{animation:grow 1s cubic-bezier(.2,.8,.2,1) both}
+#meta.on .mrow:nth-child(2) .mbar i{animation-delay:.08s}
+#meta.on .mrow:nth-child(3) .mbar i{animation-delay:.16s}
+#meta.on .mrow:nth-child(4) .mbar i{animation-delay:.24s}
+#meta.on .mrow:nth-child(5) .mbar i{animation-delay:.32s}
+#meta.on .mrow:nth-child(6) .mbar i{animation-delay:.4s}
+@media (prefers-reduced-motion:reduce){.deco,.qc,.mbar i,.js main>section.on{animation:none!important}}
 </style>
 </head>
 <body>
@@ -282,8 +309,8 @@ symbol .a{stroke:var(--accent)}symbol .b{stroke:var(--muted)}
 
 <main>
 <section class="hero" id="inicio">
-  <svg class="deco" aria-hidden="true" style="width:300px;height:300px;right:-90px;top:-70px"><use href="#d-hept"/></svg>
-  <svg class="deco" aria-hidden="true" style="width:340px;height:200px;left:-80px;bottom:-95px"><use href="#d-wave"/></svg>
+  <svg class="deco fig-hept" aria-hidden="true" style="width:300px;height:300px;right:-90px;top:-70px"><use href="#d-hept"/></svg>
+  <svg class="deco fig-wave" aria-hidden="true" style="width:340px;height:200px;left:-80px;bottom:-95px"><use href="#d-wave"/></svg>
   <div class="wrap">
     <div>
       <h1>De tu primera carta a tu <em>primer deck</em>.</h1>
@@ -309,8 +336,8 @@ symbol .a{stroke:var(--accent)}symbol .b{stroke:var(--muted)}
 </section>
 
 <section class="alt" id="cartas">
-  <svg class="deco" aria-hidden="true" style="width:320px;height:320px;left:-120px;top:120px"><use href="#d-star"/></svg>
-  <svg class="deco" aria-hidden="true" style="width:280px;height:280px;right:-110px;bottom:60px"><use href="#d-circ"/></svg>
+  <svg class="deco fig-star" aria-hidden="true" style="width:320px;height:320px;left:-120px;top:120px"><use href="#d-star"/></svg>
+  <svg class="deco fig-circ" aria-hidden="true" style="width:280px;height:280px;right:-110px;bottom:60px"><use href="#d-circ"/></svg>
   <div class="wrap">
     <div class="eyebrow">Paso 1</div>
     <h2>Conoce los tres tipos de carta</h2>
@@ -398,8 +425,8 @@ symbol .a{stroke:var(--accent)}symbol .b{stroke:var(--muted)}
 </section>
 
 <section id="jugar">
-  <svg class="deco" aria-hidden="true" style="width:520px;height:340px;right:-200px;top:-40px;transform:rotate(-14deg)"><use href="#d-dome"/></svg>
-  <svg class="deco" aria-hidden="true" style="width:300px;height:300px;left:-130px;top:52%"><use href="#d-tri"/></svg>
+  <svg class="deco fig-dome" aria-hidden="true" style="width:520px;height:340px;right:-200px;top:-40px;transform:rotate(-14deg)"><use href="#d-dome"/></svg>
+  <svg class="deco fig-tri" aria-hidden="true" style="width:300px;height:300px;left:-130px;top:52%"><use href="#d-tri"/></svg>
   <div class="wrap">
     <div class="eyebrow">Paso 2</div>
     <h2>Cómo se juega una partida</h2>
@@ -476,8 +503,8 @@ symbol .a{stroke:var(--accent)}symbol .b{stroke:var(--muted)}
 </section>
 
 <section class="alt" id="tecnicas">
-  <svg class="deco" aria-hidden="true" style="width:340px;height:340px;left:-150px;bottom:-90px;transform:rotate(20deg)"><use href="#d-hept"/></svg>
-  <svg class="deco" aria-hidden="true" style="width:380px;height:220px;right:-90px;top:10px"><use href="#d-wave"/></svg>
+  <svg class="deco fig-hept" aria-hidden="true" style="width:340px;height:340px;left:-150px;bottom:-90px;transform:rotate(20deg)"><use href="#d-hept"/></svg>
+  <svg class="deco fig-wave" aria-hidden="true" style="width:380px;height:220px;right:-90px;top:10px"><use href="#d-wave"/></svg>
   <div class="wrap">
     <div class="eyebrow">Paso 3</div>
     <h2>Técnicas para jugar mejor</h2>
@@ -497,8 +524,8 @@ symbol .a{stroke:var(--accent)}symbol .b{stroke:var(--muted)}
 </section>
 
 <section id="deck">
-  <svg class="deco" aria-hidden="true" style="width:300px;height:300px;left:-130px;top:30px"><use href="#d-circ"/></svg>
-  <svg class="deco" aria-hidden="true" style="width:360px;height:360px;right:-150px;top:48%;transform:rotate(40deg)"><use href="#d-star"/></svg>
+  <svg class="deco fig-circ" aria-hidden="true" style="width:300px;height:300px;left:-130px;top:30px"><use href="#d-circ"/></svg>
+  <svg class="deco fig-star" aria-hidden="true" style="width:360px;height:360px;right:-150px;top:48%;transform:rotate(40deg)"><use href="#d-star"/></svg>
   <div class="wrap">
     <div class="eyebrow">Paso 4</div>
     <h2>Arma tu deck</h2>
@@ -565,7 +592,7 @@ symbol .a{stroke:var(--accent)}symbol .b{stroke:var(--muted)}
 </section>
 
 <section class="alt" id="meta">
-  <svg class="deco" aria-hidden="true" style="width:320px;height:320px;right:-120px;top:-50px"><use href="#d-tri"/></svg>
+  <svg class="deco fig-tri" aria-hidden="true" style="width:320px;height:320px;right:-120px;top:-50px"><use href="#d-tri"/></svg>
   <div class="wrap">
     <div class="eyebrow">Lo que está ganando</div>
     <h2>Los decks más ganadores del momento</h2>
@@ -589,8 +616,8 @@ symbol .a{stroke:var(--accent)}symbol .b{stroke:var(--muted)}
 </section>
 
 <section id="quiz">
-  <svg class="deco" aria-hidden="true" style="width:560px;height:360px;left:-240px;bottom:-110px;transform:rotate(12deg)"><use href="#d-dome"/></svg>
-  <svg class="deco" aria-hidden="true" style="width:260px;height:260px;right:-90px;top:40px"><use href="#d-hept"/></svg>
+  <svg class="deco fig-dome" aria-hidden="true" style="width:560px;height:360px;left:-240px;bottom:-110px;transform:rotate(12deg)"><use href="#d-dome"/></svg>
+  <svg class="deco fig-hept" aria-hidden="true" style="width:260px;height:260px;right:-90px;top:40px"><use href="#d-hept"/></svg>
   <div class="wrap">
     <div class="eyebrow">Ponte a prueba</div>
     <h2>¿Ya estás listo para tu primera partida?</h2>
@@ -606,8 +633,8 @@ symbol .a{stroke:var(--accent)}symbol .b{stroke:var(--muted)}
 </section>
 
 <section class="alt" id="glosario">
-  <svg class="deco" aria-hidden="true" style="width:380px;height:220px;left:-80px;top:0"><use href="#d-wave"/></svg>
-  <svg class="deco" aria-hidden="true" style="width:280px;height:280px;right:-120px;bottom:-80px"><use href="#d-circ"/></svg>
+  <svg class="deco fig-wave" aria-hidden="true" style="width:380px;height:220px;left:-80px;top:0"><use href="#d-wave"/></svg>
+  <svg class="deco fig-circ" aria-hidden="true" style="width:280px;height:280px;right:-120px;bottom:-80px"><use href="#d-circ"/></svg>
   <div class="wrap">
     <div class="eyebrow">Para no perderte</div>
     <h2>Glosario rápido</h2>
@@ -686,6 +713,7 @@ function show(){
     b.onclick=()=>{
       [...$('qo').children].forEach((x,j)=>{x.disabled=true; if(j===c.a)x.classList.add('right');});
       if(i===c.a) score++; else b.classList.add('wrong');
+      quizReact(i===c.a);
       $('qw').textContent=(i===c.a?'¡Correcto! ':'Casi. ')+c.w;
       $('qs').textContent=`Aciertos: ${score}`;
       $('qb').textContent=qi<Q.length-1?'Siguiente':'Ver resultado'; $('qb').hidden=false;
@@ -697,7 +725,7 @@ $('qb').onclick=()=>{
   if(qi<Q.length-1){qi++; show(); return;}
   if(qi===Q.length-1 && $('qb').textContent==='Ver resultado'){
     $('qn').textContent='Resultado'; $('qo').innerHTML='';
-    $('qq').textContent=`${score} de ${Q.length} aciertos`;
+    $('qq').textContent=`${score} de ${Q.length} aciertos`; if(score>=3) confetti();
     $('qw').textContent=score===Q.length?'Perfecto. Baraja y a jugar.':score>=3?'Vas muy bien. Repasa lo que fallaste y estás listo.':'Dale otra leída a «Cómo se juega» y vuelve a intentarlo.';
     $('qb').textContent='Volver a empezar'; return;
   }
@@ -781,6 +809,23 @@ document.addEventListener('click',e=>{
 });
 window.addEventListener('popstate',()=>showPage(location.hash.slice(1)));
 showPage(location.hash.slice(1));
+// Animaciones del quiz: las criaturas de las esquinas saltan o se sacuden, y cae confeti al terminar bien
+function quizReact(ok){
+  document.querySelectorAll('.qc').forEach((e,i)=>{
+    e.classList.remove('hop','shake'); void e.offsetWidth;
+    e.style.animationDelay=(ok?i*70:0)+'ms'; e.classList.add(ok?'hop':'shake');
+  });
+}
+function confetti(){
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+  const box=document.querySelector('.quiz'), cols=['#ff6a3d','#ffd23f','#3aa0f0','#4cb85a','#a66be0','#ffffff'];
+  for(let i=0;i<48;i++){
+    const d=document.createElement('i'); d.className='confetti';
+    const sz=6+Math.floor(Math.random()*3)*2;
+    d.style.cssText=`left:${Math.random()*100}%;width:${sz}px;height:${sz}px;background:${cols[i%cols.length]};animation-duration:${1.4+Math.random()*1.4}s;animation-delay:${Math.random()*.6}s;--dx:${Math.round(Math.random()*120-60)}px`;
+    d.addEventListener('animationend',()=>d.remove()); box.appendChild(d);
+  }
+}
 </script>
 </body>
 </html>
