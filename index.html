@@ -228,9 +228,9 @@ symbol .a{stroke:var(--accent)}symbol .b{stroke:var(--muted)}
 /* Abanico interactivo: la carta sube al pasar el cursor y pasa al frente al hacer clic */
 .fan .mini{cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent;transform:rotate(var(--r)) translateY(var(--lift,0));transition:transform .28s cubic-bezier(.2,.8,.2,1),box-shadow .28s}
 .fan .m1{--r:-22deg}.fan .m2{--r:-8deg}.fan .m3{--r:6deg}.fan .m4{--r:20deg}
-.fan .mini.front{--lift:-8px;box-shadow:0 14px 34px rgba(0,0,0,.55)}
+.fan .mini.front{box-shadow:0 14px 34px rgba(0,0,0,.55)}
 .fan .mini:hover,.fan .mini:focus-visible{--lift:-30px}
-.fan .mini:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.fan .mini{outline:none}
 </style>
 </head>
 <body>
@@ -701,18 +701,25 @@ const ICONS={
 };
 document.querySelectorAll('[data-sprite]').forEach(e=>e.innerHTML=sprite(CREATURES[e.dataset.sprite],16,+e.dataset.scale));
 document.querySelectorAll('[data-icon]').forEach(e=>e.innerHTML=sprite(ICONS[e.dataset.icon],12,+e.dataset.scale));
-// Abanico de la portada: clic (o Enter) trae la carta al frente
-let fanZ=10;
-document.querySelectorAll('.fan .mini').forEach(c=>{
+// Abanico de la portada: la carta elegida pasa al frente y las demás se reacomodan,
+// de modo que el abanico siempre conserva su forma y todas quedan a la vista
+const fanCards=[...document.querySelectorAll('.fan .mini')];
+const fanSlots=[-22,-8,6,20];
+let fanOrder=[...fanCards];
+function layFan(){
+  fanOrder.forEach((c,i)=>{
+    c.style.setProperty('--r',fanSlots[i]+'deg'); c.style.zIndex=i+1;
+    c.classList.toggle('front',i===fanOrder.length-1);
+  });
+}
+fanCards.forEach(c=>{
   c.tabIndex=0; c.setAttribute('role','button');
   c.setAttribute('aria-label','Traer al frente la carta de '+c.textContent.trim());
-  const front=()=>{
-    document.querySelectorAll('.fan .mini.front').forEach(x=>x.classList.remove('front'));
-    c.style.zIndex=++fanZ; c.classList.add('front');
-  };
+  const front=()=>{ fanOrder=fanOrder.filter(x=>x!==c).concat(c); layFan(); };
   c.addEventListener('click',front);
   c.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault();front();} });
 });
+layFan();
 </script>
 </body>
 </html>
