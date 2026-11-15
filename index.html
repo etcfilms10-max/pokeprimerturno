@@ -258,6 +258,7 @@ symbol .a{stroke:var(--accent)}symbol .b{stroke:var(--muted)}
 .qc3{left:-24px;bottom:-24px;transform:rotate(10deg)}
 .qc4{right:-24px;bottom:-24px;transform:rotate(-10deg)}
 @media (max-width:820px){.qc1,.qc3{left:-12px}.qc2,.qc4{right:-12px}}
+.types span{padding:5px 12px 5px 8px}.types i{width:auto;height:auto;border:0;border-radius:0;display:block}
 </style>
 </head>
 <body>
@@ -347,11 +348,11 @@ symbol .a{stroke:var(--accent)}symbol .b{stroke:var(--muted)}
       </div>
     </div>
     <div class="types" aria-label="Tipos de Energía">
-      <span><i style="background:#5aa33a"></i>Planta</span><span><i style="background:#e4572e"></i>Fuego</span>
-      <span><i style="background:#2d8fd5"></i>Agua</span><span><i style="background:#f2c200"></i>Rayo</span>
-      <span><i style="background:#9b5fc0"></i>Psíquico</span><span><i style="background:#c06a2c"></i>Lucha</span>
-      <span><i style="background:#3b4a57"></i>Oscura</span><span><i style="background:#8a97a3"></i>Metálica</span>
-      <span><i style="background:#b8962e"></i>Dragón</span><span><i style="background:#e8e6df"></i>Incolora</span>
+      <span><i data-icon="Planta" data-scale="2"></i>Planta</span><span><i data-icon="Fuego" data-scale="2"></i>Fuego</span>
+      <span><i data-icon="Agua" data-scale="2"></i>Agua</span><span><i data-icon="Rayo" data-scale="2"></i>Rayo</span>
+      <span><i data-icon="Psíquico" data-scale="2"></i>Psíquico</span><span><i data-icon="Lucha" data-scale="2"></i>Lucha</span>
+      <span><i data-icon="Oscura" data-scale="2"></i>Oscura</span><span><i data-icon="Metálica" data-scale="2"></i>Metálica</span>
+      <span><i data-icon="Dragón" data-scale="2"></i>Dragón</span><span><i data-icon="Incolora" data-scale="2"></i>Incolora</span>
     </div>
 
     <h2 style="margin-top:64px">Cómo leer una carta de Pokémon</h2>
@@ -704,7 +705,7 @@ $('qb').onclick=()=>{
 };
 show();
 // Miniaturas pixel: las filas de media anchura se reflejan para formar la figura completa
-const PAL={k:'#070b1c',o:'#ff6a3d',y:'#ffd23f',b:'#3aa0f0',w:'#ffffff',g:'#4cb85a',l:'#a6e86a',p:'#a66be0',c:'#ff9ec4',s:'#d5dcec',d:'#8b97c9',r:'#d9a520'};
+const PAL={k:'#070b1c',o:'#ff6a3d',y:'#ffd23f',b:'#3aa0f0',w:'#ffffff',g:'#4cb85a',l:'#a6e86a',p:'#a66be0',c:'#ff9ec4',s:'#d5dcec',d:'#8b97c9',r:'#d9a520',f:'#d98a45',m:'#a9b6c6'};
 function sprite(rows,size,scale){
   let r='';
   rows.forEach((row,y)=>{
@@ -725,6 +726,9 @@ const ICONS={
  'Planta':["........gggg","......gggggg","....gggglggg","...gggglgggg","..gggglggggg","..ggglgggggg",".ggglgggggg.",".gglggggggg.",".glgggggg...",".lgggggg....","lggggg......","l..........."],
  'Psíquico':["......","......","......","..pppp",".ppwww","ppwwkk","ppwwkk",".ppwww","..pppp","......","......","......"],
  'Incolora':[".....s",".....s","....ss","....ss","ssssss",".sssss","..ssss","..ssss",".sssss",".sss.s","ss....","s....."],
+ 'Rayo':["......yyyy..",".....yyyy...","....yyyy....","...yyyy.....","..yyyyyyyy..","..yyyyyyy...",".....yyy....","....yyy.....","...yyy......","..yyy.......","..yy........","..y........."],
+ 'Lucha':["............","..ffffffff..",".ffkffkffkf.",".ffkffkffkf.",".ffkffkffkff",".fffffffffff",".fkkkkkkkfff",".fffffffffff",".ffffffffff.","..fffffffff.","...fffffff..","............"],
+ 'Metálica':["...mmm","..mmmm",".mmmmm","mmmm..","mmm...","mmm...","mmm...","mmm...","mmmm..",".mmmmm","..mmmm","...mmm"],
  'Oscura':["....dddd....","..dddd......",".dddd.......",".ddd........","dddd........","dddd........","dddd........","ddddd......d",".ddddd....dd",".dddddddddd.","..dddddddd..","....dddd...."],
  'Dragón':["r.....","rr....","rrr..r","rrrr.r",".rrrrr","..rrrr","...rrr","..rrrr",".rrr.r","rr...r","r.....","......"]
 };
