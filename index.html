@@ -286,6 +286,15 @@ symbol .a{stroke:var(--accent)}symbol .b{stroke:var(--muted)}
 #meta.on .mrow:nth-child(5) .mbar i{animation-delay:.32s}
 #meta.on .mrow:nth-child(6) .mbar i{animation-delay:.4s}
 @media (prefers-reduced-motion:reduce){.deco,.qc,.mbar i,.js main>section.on{animation:none!important}}
+/* Técnicas: criaturas con animación de dos cuadros, como sprites de Game Boy */
+@keyframes idle{0%,49.9%{translate:0 0}50%,100%{translate:0 -3px}}
+@keyframes look{0%,72%{scale:1 1}73%,88%{scale:-1 1}89%,100%{scale:1 1}}
+.tech .corner svg{animation:idle .7s linear infinite,look 6s linear infinite}
+.tech .card:nth-child(2n) .corner svg{animation-delay:-.35s,-2s}
+.tech .card:nth-child(3n) .corner svg{animation-delay:-.15s,-4s}
+.tech .card:nth-child(5n) .corner svg{animation-delay:-.5s,-1s}
+.tech .card:hover .corner svg{animation-duration:.28s,6s}
+@media (prefers-reduced-motion:reduce){.tech .corner svg{animation:none!important}}
 </style>
 </head>
 <body>
