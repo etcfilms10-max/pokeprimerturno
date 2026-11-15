@@ -250,6 +250,14 @@ symbol .a{stroke:var(--accent)}symbol .b{stroke:var(--muted)}
 .dcpx{margin:auto;background:rgba(255,255,255,.82);border-radius:7px;padding:5px}
 @media (max-width:1000px){.deckcards{position:static;margin:22px 0 4px;gap:10px;flex-wrap:wrap}.dc{width:74px;height:104px}.dc .dcpx svg{width:44px;height:44px}}
 @media (min-width:1001px){#deck h2+.lead{max-width:min(62ch,calc(100% - 480px))}}
+/* Criaturas pixel en las esquinas del cuadro de preguntas */
+.quiz{position:relative}
+.qc{position:absolute;pointer-events:none}
+.qc1{left:-24px;top:-24px;transform:rotate(-12deg)}
+.qc2{right:-24px;top:-24px;transform:rotate(12deg)}
+.qc3{left:-24px;bottom:-24px;transform:rotate(10deg)}
+.qc4{right:-24px;bottom:-24px;transform:rotate(-10deg)}
+@media (max-width:820px){.qc1,.qc3{left:-12px}.qc2,.qc4{right:-12px}}
 </style>
 </head>
 <body>
@@ -586,6 +594,7 @@ symbol .a{stroke:var(--accent)}symbol .b{stroke:var(--muted)}
     <div class="eyebrow">Ponte a prueba</div>
     <h2>¿Ya estás listo para tu primera partida?</h2>
     <div class="card quiz">
+      <span class="qc qc1" data-sprite="Brasalito" data-scale="3"></span><span class="qc qc2" data-sprite="Gotín" data-scale="3"></span><span class="qc qc3" data-sprite="Brotín" data-scale="3"></span><span class="qc qc4" data-sprite="Velito" data-scale="3"></span>
       <div class="tag" id="qn">Pregunta 1 de 5</div>
       <div class="q" id="qq"></div>
       <div class="opts" id="qo"></div>
